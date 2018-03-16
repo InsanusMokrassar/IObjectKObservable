@@ -34,7 +34,11 @@ class ObservableCommonIObject<K : Any, V : Any> internal constructor(
     constructor() : this(SimpleCommonIObject())
 
     override fun put(key: K, value: V) {
-        delegate.put(key, value)
+        this[key] = value
+    }
+
+    override fun set(key: K, value: V) {
+        delegate[key] = value
         subject.onNext(Pair(key, value))
     }
 
